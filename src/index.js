@@ -4,6 +4,7 @@ import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
 import { shuffle, sample } from 'underscore';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 const authors = [
   {
@@ -73,9 +74,28 @@ const onAnswerSelected = (answer) => {
   render();
 }
 
+function App() {
+  return (
+    < AuthorQuiz  {...state} onAnswerSelected={onAnswerSelected} />
+  );
+}
+
+function AddAuthorForm() {
+  return (
+    <div>
+      <h1>Add</h1>
+    </div>
+  );
+}
+
 function render() {
   ReactDOM.render(
-    < AuthorQuiz  {...state} onAnswerSelected={onAnswerSelected} />,
+    <BrowserRouter>
+      <React.Fragment>
+        <Route exact path="/" component={App} />
+        <Route exact path="/add" component={AddAuthorForm} />
+      </React.Fragment>
+    </BrowserRouter>,
     document.getElementById('root')
   );
 }

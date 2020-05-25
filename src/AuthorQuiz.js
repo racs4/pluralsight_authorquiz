@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './AuthorQuiz.css';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
@@ -13,7 +14,7 @@ function Hero() {
 
 function Book({ title, onClick }) {
   return (
-    <div className="answer" onClick={() => {onClick(title)}}>
+    <div className="answer" onClick={() => { onClick(title) }}>
       <h4>{title}</h4>
     </div>
   );
@@ -37,7 +38,7 @@ function Turn({ author, books, highlight, onAnswerSelected }) {
       <div className="col-6">
         {books.map((title) => {
           return (
-            <Book title={title} key={title} onClick={onAnswerSelected}/>
+            <Book title={title} key={title} onClick={onAnswerSelected} />
           );
         })}
       </div>
@@ -51,7 +52,8 @@ function Continue() {
 
 function Footer() {
   return (
-    <div className="col-10 offset-1 row">
+    <div className="col-10 offset-1">
+      <Link to="/add" > Add an author </Link>
       <p>All images are from <a href="#">Wikimedia Commons</a> and are in public domain.</p>
     </div>
   );
@@ -62,7 +64,7 @@ function AuthorQuiz({ turnData, highlight, onAnswerSelected }) {
   return (
     <div className="container-fluid">
       <Hero />
-      <Turn {...turnData} highlight = {highlight} onAnswerSelected={onAnswerSelected}/>
+      <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
       <Continue />
       <Footer />
     </div>
