@@ -1,0 +1,26 @@
+.turn > div {
+    height: 400px;
+}
+
+.turn {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.author-image  {
+    max-height: 100%;
+    width: 100%;
+}
+
+.answer {
+    background-color: #f0f7fd;
+    border-color: #d0e3f0;
+    margin-bottom: 20px;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid;
+    cursor: pointer;
+}
+
+.answer:hover {
+    background-color: #d0e3f0;
+}
