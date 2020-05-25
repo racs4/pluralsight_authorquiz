@@ -57,16 +57,27 @@ const getTurnData = (authors) => {
   return {
     books: fourRandomBooks,
     author: authors.find((author) => {
-      return author.books.some((title) => title === correctAnswer )
+      return author.books.some((title) => title === correctAnswer)
     })
   }
 }
 
 const state = {
-  turnData: getTurnData(authors)
+  turnData: getTurnData(authors),
+  highlight: ''
 }
 
-ReactDOM.render(
-  < AuthorQuiz  {...state} />,
-  document.getElementById('root')
-);
+const onAnswerSelected = (answer) => {
+  const isCorrect = state.turnData.author.books.find((title) => title === answer);
+  state.highlight = isCorrect ? 'correct' : 'wrong';
+  render();
+}
+
+function render() {
+  ReactDOM.render(
+    < AuthorQuiz  {...state} onAnswerSelected={onAnswerSelected} />,
+    document.getElementById('root')
+  );
+}
+
+render();
