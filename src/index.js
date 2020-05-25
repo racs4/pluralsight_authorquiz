@@ -64,7 +64,7 @@ const getTurnData = (authors) => {
   }
 }
 
-const state = {
+let state = {
   turnData: getTurnData(authors),
   highlight: ''
 }
@@ -75,9 +75,21 @@ const onAnswerSelected = (answer) => {
   render();
 }
 
+function resetState() {
+  return {
+    turnData: getTurnData(authors),
+    highlight: ''
+  }
+}
+
 function App() {
   return (
-    < AuthorQuiz  {...state} onAnswerSelected={onAnswerSelected} />
+    < AuthorQuiz  {...state}
+      onAnswerSelected={onAnswerSelected}
+      onContinue={() => {
+        state = resetState();
+        render();
+      }} />
   );
 }
 

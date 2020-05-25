@@ -46,8 +46,18 @@ function Turn({ author, books, highlight, onAnswerSelected }) {
   );
 }
 
-function Continue() {
-  return (<div />);
+function Continue({ show, onContinue }) {
+  return (
+    <div>
+      {
+        show ?
+          (<div className="col-2 offset-10 mt-2">
+            <button className="btn btn-primary" onClick={onContinue}>Continue</button>
+          </div>) :
+          null
+      }
+    </div>
+  );
 }
 
 function Footer() {
@@ -59,13 +69,13 @@ function Footer() {
   );
 }
 
-function AuthorQuiz({ turnData, highlight, onAnswerSelected }) {
+function AuthorQuiz({ turnData, highlight, onAnswerSelected, onContinue }) {
   console.log(turnData);
   return (
     <div className="container-fluid">
       <Hero />
       <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
-      <Continue />
+      <Continue show={highlight === "correct"} onContinue={onContinue} />
       <Footer />
     </div>
   );
