@@ -1,5 +1,7 @@
 import React from 'react';
 import './AddAuthorForm.css';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class AuthorForm extends React.Component {
     constructor(props) {
@@ -44,7 +46,7 @@ class AuthorForm extends React.Component {
                     <div>
                         <ul className="list-group">
                             {this.state.books.map((book, i) => {
-                                return (<li style={{ listStyleType: "none", fontWeight: "bold"}} key={i}> {book} </li>);
+                                return (<li style={{ listStyleType: "none", fontWeight: "bold" }} key={i}> {book} </li>);
                             })}
                         </ul>
                     </div>
@@ -64,7 +66,16 @@ class AuthorForm extends React.Component {
     }
 }
 
-function AddAuthorForm({ onAddAuthor }) {
+function mapDispatchToProps(dispatch, props) {
+    return {
+        onAddAuthor: (author) => {
+            dispatch({ type: "ADD_AUTHOR", author });
+            props.history.push("/");
+        }
+    }
+}
+
+const AddAuthorForm = connect(() => { }, mapDispatchToProps)(function ({ onAddAuthor }) {
     return (
         <div className="container-fluid add-author-form">
             <div className="jumbotron col-10 offset-1">
@@ -73,6 +84,6 @@ function AddAuthorForm({ onAddAuthor }) {
             </div>
         </div>
     );
-}
+});
 
-export default AddAuthorForm;
+export default AddAuthorForm; 
